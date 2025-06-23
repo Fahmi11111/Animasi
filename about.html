@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tentang - Dota 2 Hero Showcase oleh Fahmi</title>
+    <meta
+      name="description"
+      content="Kenali Fahmi, pengembang web kreatif di balik proyek showcase hero Dota 2 yang menggabungkan desain dan narasi interaktif."
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-color: #0f0f0f;
+        --text-color: #f0f0f0;
+        --highlight: #ffd700;
+        --button-bg: #ffd700;
+        --button-text: #000;
+        --button-hover: #e9d022;
+        --footer-bg: #111;
+        --card-bg: rgba(255, 255, 255, 0.02);
+      }
+
+      [data-theme="light"] {
+        --bg-color: #f8f9fa;
+        --text-color: #111;
+        --highlight: #e60b09;
+        --button-bg: #111;
+        --button-text: #fff;
+        --button-hover: #444;
+        --footer-bg: #ddd;
+        --card-bg: #ffffff;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Roboto", sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      header {
+        display: flex;
+        justify-content: center; /* tengah horizontal */
+        align-items: center;
+        padding: 1rem 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      nav {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: var(--text-color);
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      nav a:hover {
+        color: var(--highlight);
+      }
+
+      nav a.active {
+        color: var(--highlight);
+      }
+
+      .theme-toggle {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        cursor: pointer;
+        background: none;
+        border: 1px solid var(--text-color);
+        border-radius: 20px;
+        padding: 0.4rem 1rem;
+        font-size: 0.9rem;
+        color: var(--text-color);
+        transition: background 0.3s, color 0.3s;
+      }
+
+      .about-page {
+        min-height: 100vh;
+        padding: 60px 20px;
+      }
+
+      .about-section {
+        max-width: 800px;
+        margin: auto;
+        text-align: center;
+        padding: 2rem;
+        border-radius: 12px;
+        background-color: var(--card-bg);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .about-title {
+        font-family: "Playfair Display", serif;
+        font-size: 2.5rem;
+        margin-bottom: 1.2rem;
+        color: var(--highlight);
+      }
+
+      .about-description {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+      }
+
+      .about-highlight {
+        background: linear-gradient(90deg, #e60b09, #e9d022);
+        background-clip: text;
+        color: transparent;
+        font-weight: 600;
+      }
+
+      .about-buttons {
+        margin-top: 30px;
+      }
+
+      .about-buttons a {
+        display: inline-block;
+        margin: 0 10px;
+        padding: 12px 24px;
+        background: var(--button-bg);
+        color: var(--button-text);
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .about-buttons a:hover {
+        background: var(--button-hover);
+        transform: scale(1.05);
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 0.9rem;
+        background-color: var(--footer-bg);
+        color: var(--text-color);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <nav>
+        <a href="index.html">Beranda</a>
+        <a href="about.html" class="active">Tentang</a>
+        <a href="kontak.html">Kontak</a>
+      </nav>
+      <button class="theme-toggle" onclick="toggleTheme()">🌙/☀️</button>
+    </header>
+
+    <!-- About Section -->
+    <main class="about-page">
+      <section class="about-section">
+        <h1 class="about-title">Kenalan dengan Pembuatnya</h1>
+        <p class="about-description">
+          Halo! Saya <span class="about-highlight">Fahmi</span> — seorang
+          pengembang web yang gemar memadukan <em>code</em> dan kreativitas.
+          Proyek ini adalah bentuk apresiasi saya terhadap dunia
+          <span class="about-highlight">Dota 2</span>, menghadirkan hero seperti
+          <strong>Dragon Knight</strong> dan
+          <strong>Shadow Shaman</strong> secara visual dan interaktif.
+        </p>
+        <p class="about-description">
+          Di balik layar, saya menggunakan HTML, CSS, dan JavaScript untuk
+          membangun antarmuka yang responsif dan menarik secara visual — bukan
+          hanya dilihat, tapi juga dirasakan.
+        </p>
+        <p class="about-description">
+          Saya percaya detail kecil menciptakan kesan besar. Jika Anda sedang
+          mencari developer yang penuh semangat, cepat belajar, dan cinta
+          tantangan — mari bekerja sama!
+        </p>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2025 Fahmi. Kode dengan hati, desain dengan visi.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+      function toggleTheme() {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute("data-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        html.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+      }
+
+      // Load theme preference
+      window.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem("theme") || "dark";
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      });
+    </script>
+  </body>
+</html>
