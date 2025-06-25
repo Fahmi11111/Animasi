@@ -45,6 +45,14 @@ header nav a {
   margin-top: -50px;
 }
 
+.slider .item {
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+}
+.slider .item:first-child {
+  opacity: 1;
+}
+
 .slider .list {
   position: relative;
   height: 100%;
@@ -134,22 +142,36 @@ header nav a {
 /* ========== THUMBNAILS ========== */
 .thumbnail {
   position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 3rem; /* beri jarak aman dari tombol panah */
+  left: 0;
+  width: 100%;
   display: flex;
-  gap: 25px;
-  z-index: 999;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  pointer-events: none; /* biar nggak bisa di-scroll */
 }
 
 .thumbnail .item {
-  width: 200px;
-  height: 280px;
-  position: relative;
+  width: 45vw;
+  height: auto;
+  aspect-ratio: 3/4;
+  max-width: 150px;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s ease;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.5s ease;
+  display: none;
+  pointer-events: auto;
+  position: relative;
+}
+
+.thumbnail .item.show {
+  display: block;
+  opacity: 1;
+  transform: scale(1);
 }
 
 .thumbnail .item img {
@@ -157,6 +179,7 @@ header nav a {
   height: 100%;
   object-fit: cover;
   display: block;
+  border-radius: 10px;
 }
 
 /* Detail di dalam gambar */
@@ -178,7 +201,7 @@ header nav a {
 }
 
 .thumbnail .item .detail blockquote {
-  font-size: 0.8rem;
+  font-size: 3rem;
   color: #ddd;
   margin: 0;
   text-shadow: 0 1px 2px black;
@@ -346,43 +369,85 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .slider: 100vh;
-
-  .detail .name {
-    font-size: 2rem;
+  .thumbnail {
+    position: absolute;
+    bottom: 5rem;
+    left: 0;
+    right: 0;
+    padding: 0 16px;
+    display: flex;
+    overflow: hidden;
+    gap: 12px;
+    justify-content: center;
+    scrollbar-width: none; /* Firefox */
+    gap: 0;
+    transform: translateY(20%);
   }
 
-  .thumbnail {
-    bottom: 20px;
-    gap: 12px;
+  .thumbnail::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
   }
 
   .thumbnail .item {
-    width: 140px;
-    height: 190px;
+    flex: 0 0 auto;
+    width: 120px;
+    aspect-ratio: 3/4;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    background: #111;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    display: none;
+  }
+
+  .thumbnail .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .thumbnail .item .detail {
+    position: absolute;
+    bottom: 0;
+    padding: 6px;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
   }
 
   .thumbnail .item .detail .name {
-    font-size: 0.85rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
   }
 
   .thumbnail .item .detail blockquote {
-    font-size: 0.7rem;
+    font-size: 3rem;
+    color: #ccc;
+    margin: 0;
   }
-}
 
-.arrows {
-  bottom: 70px;
-}
+  .thumbnail .item.active {
+    display: block;
+    margin: auto;
+    width: 45vw;
+    aspect-ratio: 3/4;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5);
+  }
 
-.arrows button {
-  width: 35px;
-  height: 35px;
-  font-size: 0.9rem;
-}
+  .arrows {
+    bottom: 20px;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
 
-.detail .desc {
-  font-size: 0.8rem;
+  .arrows button {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
