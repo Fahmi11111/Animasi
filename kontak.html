@@ -21,7 +21,7 @@
       :root {
         --bg-color: #0f0f0f;
         --text-color: #f0f0f0;
-        --highlight: #d4af37; /* Gold klasik */
+        --highlight: #d4af37;
         --button-bg: #d4af37;
         --button-text: #000;
         --button-hover: #bfa133;
@@ -53,40 +53,54 @@
       }
 
       header {
+        padding: 1rem 1.5rem;
+        background: transparent;
+      }
+
+      .nav-container {
+        max-width: 1000px;
+        margin: 0 auto;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 1rem 2rem;
-        gap: 2rem;
         flex-wrap: wrap;
+        gap: 1rem;
+        position: relative;
       }
 
       nav {
         display: flex;
         gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
       }
 
       nav a {
         text-decoration: none;
         color: var(--text-color);
         font-weight: 500;
+        font-size: 1rem;
+        transition: color 0.3s;
       }
 
+      nav a:hover,
       nav a.active {
         color: var(--highlight);
       }
 
       .theme-toggle {
         position: absolute;
-        right: 20px;
-        top: 20px;
-        cursor: pointer;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
         background: none;
         border: 1px solid var(--text-color);
         border-radius: 20px;
         padding: 0.4rem 1rem;
         font-size: 0.9rem;
         color: var(--text-color);
+        cursor: pointer;
+        transition: background 0.3s, color 0.3s;
       }
 
       .contact-page {
@@ -126,6 +140,7 @@
         background-color: var(--input-bg);
         color: var(--text-color);
         font-size: 1rem;
+        resize: vertical;
       }
 
       .contact-section button {
@@ -152,17 +167,38 @@
         background-color: var(--footer-bg);
         color: var(--text-color);
       }
+
+      @media (max-width: 700px) {
+        .nav-container {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        nav {
+          flex-direction: row;
+          justify-content: center;
+          gap: 1rem;
+        }
+
+        .theme-toggle {
+          position: static;
+          transform: none;
+          margin-top: 1rem;
+        }
+      }
     </style>
   </head>
   <body>
     <!-- Header -->
     <header>
-      <nav>
-        <a href="index.html">Beranda</a>
-        <a href="about.html">Tentang</a>
-        <a href="kontak.html" class="active">Kontak</a>
-      </nav>
-      <button class="theme-toggle" onclick="toggleTheme()">🌙/☀️</button>
+      <div class="nav-container">
+        <nav>
+          <a href="index.html">Beranda</a>
+          <a href="about.html">Tentang</a>
+          <a href="kontak.html" class="active">Kontak</a>
+        </nav>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙/☀️</button>
+      </div>
     </header>
 
     <!-- Contact Content -->
@@ -174,12 +210,19 @@
           formulir di bawah ini.
         </p>
 
-        <form onsubmit="handleContact(event)">
-          <input type="text" name="name" placeholder="Nama Lengkap" required />
+        <form onsubmit="sendToWhatsApp(event)">
+          <input
+            type="text"
+            name="name"
+            placeholder="Nama Lengkap"
+            autocomplete="name"
+            required
+          />
           <input
             type="email"
             name="email"
             placeholder="Alamat Email"
+            autocomplete="email"
             required
           />
           <textarea
@@ -198,7 +241,7 @@
       <p>&copy; 2025 Fahmi. Siap kolaborasi, kapan saja.</p>
     </footer>
 
-    <!-- Script Kirim ke WhatsApp + Theme Toggle -->
+    <!-- Script -->
     <script>
       function sendToWhatsApp(e) {
         e.preventDefault();
@@ -206,11 +249,17 @@
         const email = e.target.email.value.trim();
         const message = e.target.message.value.trim();
 
-        const phone = "6285714726436"; // ← GANTI dengan nomor WA milikmu
-        const text = `Halo, saya ${name}%0AEmail: ${email}%0A%0A${message}`;
-        const url = `https://wa.me/${phone}?text=${text}`;
+        if (!name || !email || !message) {
+          alert("Mohon isi semua kolom.");
+          return;
+        }
+
+        const phone = "6285714726436"; // Ganti dengan nomor WA kamu
+        const text = `Halo, saya ${name}\nEmail: ${email}\n\n${message}`;
+        const url = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
 
         window.open(url, "_blank");
+        alert("Pesan Anda diarahkan ke WhatsApp.");
         e.target.reset();
       }
 
